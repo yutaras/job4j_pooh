@@ -48,8 +48,8 @@ public class ReqTest {
                 + "Accept: */*" + ls
                 + "Content-Length: 14" + ls
                 + "Content-Type: application/x-www-form-urlencoded" + ls
-                + "" + ls +
-                "temperature=18" + ls;
+                + "" + ls
+                + "temperature=18" + ls;
         Req req = Req.of(content);
         assertThat(req.httpRequestType(), is("POST"));
         assertThat(req.getPoohMode(), is("topic"));
