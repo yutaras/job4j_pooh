@@ -30,8 +30,7 @@ public class Req {
             poohMode = partTwo[1];
             sourceName = partTwo[2];
             param = args[args.length - 1];
-        }
-        if (GET.equals(httpRequestType)) {
+        } else if (GET.equals(httpRequestType)) {
             var partTwo = partOne[1].split("/");
             poohMode = partTwo[1];
             sourceName = partTwo[2];
