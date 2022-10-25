@@ -31,7 +31,7 @@ public class PoohServer {
                         var req = Req.of(content);
                         var resp = modes.get(req.getPoohMode()).process(req);
                         String ls = System.lineSeparator();
-                        out.write(("HTTP/1.1 " + resp.status() + ls).getBytes());
+                        out.write(("HTTP/1.1 " + resp.status() + ls + ls).getBytes());
                         out.write((resp.text().concat(ls)).getBytes());
                     } catch (IOException e) {
                         e.printStackTrace();

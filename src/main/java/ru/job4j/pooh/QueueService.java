@@ -15,18 +15,16 @@ public class QueueService implements Service {
     public Resp process(Req req) {
         String text = "";
         String status = NOT_IMPLEMENTED;
-        var currentQueue = queue.get(req.getSourceName());
         if (GET.equals(req.httpRequestType())) {
-            if (currentQueue == null || currentQueue.isEmpty()) {
+            text = queue.getOrDefault(req.getSourceName(), null).poll();
+            if (text == null) {
+                text = "";
                 status = EMPTY_STATUS;
             } else {
-                text = currentQueue.poll();
                 status = OK_STATUS;
             }
         } else if (POST.equals(req.httpRequestType())) {
-            if (currentQueue == null) {
-                queue.putIfAbsent(req.getSourceName(), new ConcurrentLinkedQueue<>());
-            }
+            queue.putIfAbsent(req.getSourceName(), new ConcurrentLinkedQueue<>());
             text = req.getParam();
             queue.get(req.getSourceName()).add(text);
             status = OK_STATUS;
