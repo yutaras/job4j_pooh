@@ -16,7 +16,7 @@ public class QueueService implements Service {
         String text = "";
         String status = NOT_IMPLEMENTED;
         if (GET.equals(req.httpRequestType())) {
-            text = queue.getOrDefault(req.getSourceName(), null).poll();
+            text = queue.getOrDefault(req.getSourceName(), new ConcurrentLinkedQueue<>()).poll();
             if (text == null) {
                 text = "";
                 status = EMPTY_STATUS;
